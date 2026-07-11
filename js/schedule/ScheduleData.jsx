@@ -98,6 +98,10 @@ class ScheduleData {
     };
 
     this.venues = this.venues.sort((a, b) => {
+      if (options.venueSort === "name") {
+        return a.name.localeCompare(b.name);
+      }
+
       if (a.official && !b.official) {
         return -1;
       }
@@ -151,6 +155,14 @@ class ScheduleData {
         let date_sort = a.start_date.localeCompare(b.start_date);
         if (date_sort !== 0) {
           return date_sort;
+        }
+
+        let venue_a = this.venues.find((v) => v.name === a.venue);
+        let venue_b = this.venues.find((v) => v.name === b.venue);
+        let venue_sort =
+          this.venues.indexOf(venue_a) - this.venues.indexOf(venue_b);
+        if (venue_sort !== 0) {
+          return venue_sort;
         }
 
         return a.venue.localeCompare(b.venue);

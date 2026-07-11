@@ -176,3 +176,66 @@
     margin-bottom: 0.5em;
   }
 }
+
+.schedule-day-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em;
+  margin: 1em 0;
+
+  &.btn-group > .btn {
+    float: none;
+    border-radius: $small-border-radius !important;
+    padding-left: 0.65em;
+    padding-right: 0.65em;
+  }
+}
+
+.settings-tabs {
+  .tab-content {
+    padding: 1em 0.25em 0.25em;
+  }
+
+  .reset-filters {
+    margin-top: 1em;
+    color: #fff;
+    background-color: $brand-2026-dark-blue;
+    border-color: $brand-2026-light-blue;
+  }
+
+  .reset-filters:hover,
+  .reset-filters:focus {
+    color: #fff;
+    background-color: color.adjust($brand-2026-dark-blue, $lightness: -8%);
+  }
+}
+
+.filter-control-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin-bottom: 1em;
+
+  .control-label,
+  label {
+    margin-bottom: 0;
+  }
+}
+
+.venue-sort-control .btn.active {
+  background-color: $brand-2026-yellow;
+  color: #151735;
+  border-color: $brand-2026-yellow;
+}
+
+.filter-active-indicator {
+  display: inline-block;
+  margin-left: 0.75em;
+  padding: 0.15em 0.5em;
+  border-radius: $small-border-radius;
+  background-color: $brand-2026-yellow;
+  color: #151735;
+  font-size: 0.75em;
+  font-weight: bold;
+}

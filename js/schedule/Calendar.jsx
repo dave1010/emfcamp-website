@@ -283,28 +283,56 @@ function Hour({ hour, content, toggleFavourite, authenticated }) {
   );
 }
 
+function DayPicker({ days }) {
+  const pickerDays = days.slice(0, -1);
+
+  if (pickerDays.length === 0) {
+    return null;
+  }
+
+  return (
+    <div
+      className="schedule-day-picker btn-group"
+      role="group"
+      aria-label="Jump to day"
+    >
+      {pickerDays.map(([day, hours]) => (
+        <a key={day} href={`#${day}`} className="btn btn-primary btn-sm">
+          {hours[0].toFormat("ccc")}
+        </a>
+      ))}
+    </div>
+  );
+}
+
 function Calendar({ schedule, toggleFavourite, authenticated }) {
   const daysHours = Object.groupBy(schedule.hoursWithContent, (h) =>
     h.toFormat("DD"),
   );
+  const days = Object.entries(daysHours);
 
-  return Object.entries(daysHours).map(([day, hours]) => (
-    <div key={day} className="schedule-day">
-      <h2>{hours[0].weekdayLong}</h2>
+  return (
+    <>
+      <DayPicker days={days} />
+      {days.map(([day, hours]) => (
+        <div key={day} id={day} className="schedule-day">
+          <h2>{hours[0].weekdayLong}</h2>
 
-      {hours.map((hour) => {
-        return (
-          <Hour
-            key={hour.toISO()}
-            hour={hour}
-            content={schedule.contentForHour(hour)}
-            toggleFavourite={toggleFavourite}
-            authenticated={authenticated}
-          />
-        );
-      })}
-    </div>
-  ));
+          {hours.map((hour) => {
+            return (
+              <Hour
+                key={hour.toISO()}
+                hour={hour}
+                content={schedule.contentForHour(hour)}
+                toggleFavourite={toggleFavourite}
+                authenticated={authenticated}
+              />
+            );
+          })}
+        </div>
+      ))}
+    </>
+  );
 }
 
 export default Calendar;
